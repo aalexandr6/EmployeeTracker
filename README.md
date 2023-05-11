@@ -1,12 +1,18 @@
-# EmployeeTracker
+# EmployeeTracker (CMS)
 
 ## Project Description
 
-This project is a CLI that allows the user to view and manage the departments, roles, and employees in a company. The user can add departments, roles, and employees, while viewing deparments and updating employee roles. The application uses node, inquirer, and MySQL. It will be invoked by using the following command:
+This project is CLI application with no starter code that allows the user to view and manage the departments, roles, and employees in a company. It will be built using node, inquirer, and MySQL. The application will be invoked by using the following command:
+
+```bash
 
 ```bash
 node server.js
 ```
+
+## (CMS) Content Management System
+
+A content management system (CMS) is a software application that can be used to manage the creation and modification of digital content. They are typically used for enterprise content management (ECM) it typically supports multiple users in a collaborative environment. Features include include Web-based publishing, format management, history editing and version control, indexing, search, and retrieval.
 
 ## Criteria
 
@@ -32,8 +38,9 @@ Then I am prompted to select an employee to update and their new role and this i
 
 ## Console.Table
 
-method used to log arrays or objects to the print line in a table format. It is similar to console.log, but it is easier to read.
+Method used to log arrays or objects to the print line in a table format. It is similar to console.log, but it is easier to read.
 
 ## Questions
 
-[aalexandr6](https://github.com/aalexandr6) at aalexanderp6@gmail.com.
+
+[aalexandr6](https://github.com/aalexandr6) at aalexanderp6@gmail.com

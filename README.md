@@ -4,8 +4,6 @@
 
 This project is CLI application with no starter code that allows the user to view and manage the departments, roles, and employees in a company. It will be built using node, inquirer, and MySQL. The application will be invoked by using the following command:
 
-
-
 ```bash
 node server.js
 ```
@@ -42,5 +40,4 @@ Method used to log arrays or objects to the print line in a table format. It is 
 
 ## Questions
 
-
-[aalexandr6](https://github.com/aalexandr6) at aalexanderp6@gmail.com
+[aalexandr6](https://github.com/aalexandr6) at <aalexanderp6@gmail.com>

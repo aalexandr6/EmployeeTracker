@@ -1,36 +1,21 @@
-
-DROP DATABASE IF EXISTS business_db;
-CREATE DATABASE etracker_db;
-USE etrackers_db
-
-CREATE TABLE departments (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+DROP DATABASE IF EXISTS employee_tracker_db;
+CREATE DATABASE employee_tracker_db;
+CREATE TABLE department (
+    id: INT PRIMARY KEY,
     name VARCHAR(30)
+);  
+DROP TABLE IF EXISTS role;
+CREATE TABLE role (
+    id: INT PRIMARY KEY,
+    title: VARCHAR(30),
+    salary : DECIMAL,
+    department_id: INT
 );
-
-CREATE TABLE roles (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(30),
-    salary DECIMAL,
-    department_id INT,
-    CONSTRAINT Fk_department_id 
-    FOREIGN KEY (department_id) 
-    REFERENCES departments (id)
-    ON DELETE CASCADE
+DROP TABLE IF EXISTS employee;
+CREATE TABLE employee (
+    id: INT PRIMARY KEY,
+    first_name: VARCHAR(30),
+    last_name: VARCHAR(30),
+    role_id: INTEGER,
+    manager_id: INTEGER
 );
-
-CREATE TABLE employees (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
-    role_id INT,
-    manager_id INT DEFAULT NULL,
-    CONSTRAINT Fk_role_id
-    FOREIGN KEY (role_id)
-    REFERENCES roles (id)
-    ON DELETE SET NULL
-);
-
-ALTER TABLE employees
-ADD FOREIGN KEY (manager_id) REFERENCES employees (id)
-ON DELETE SET NULL;

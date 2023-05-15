@@ -1,26 +1,34 @@
 -- Inserts names of departments into department table
-INSERT INTO department
+INSERT INTO departments
   (name)
 VALUES
-  ('Engineering'),
+  ('Accounting'),
   ('Sales'),
-  ('Finance'),
-  ('Legal');
+  ('Customer Service'),
+  ('Human Resources'),
+  ('Information Technology'),
+  ('Marketing');
 
--- Inserts roles of employee into role table
-INSERT INTO role
+-- Inserts names of roles into role table
+INSERT INTO roles
   (title, salary, department_id)
 VALUES
-  ('Software Engineer', 85000, 1),
-  ('Salesperson', 75000, 2),
-  ('Accountant', 125000, 3),
-  ('Lawyer', 200000, 4);
+  ('Accountant', 900000, 1),
+  ('Salesperson', 60000, 2),
+  ('Customer Service Representative', 55000, 3),
+  ('Human Resources Representative',65000, 4),
+  ('IT Specialist', 1000000, 5),
+  ('Marketing Specialist', 55000, 6);
 
--- Inserts employee information into employee table
-INSERT INTO employee
+-- Inserts names of employees into employee table
+INSERT INTO employees
   (first_name, last_name, role_id, manager_id)
+
 VALUES
-  ('Juan', 'Garcia', 1, 4),
-  ('Jonathan', 'Villcapoma', 2, 3),
-  ('Jesus', 'Meraz', 3, 1),
-  ('Estefany', 'Munoz', 4, 5);
+  ('John', 'Doe', 1, NULL),
+  ('Jane', 'Doe', 2, 1),
+  ('Jack', 'Doe', 3, 2),
+  ('Jill', 'Doe', 4, 3),
+  ('James', 'Doe', 5, 4),
+  ('Jenny', 'Doe', 6, 5);
+ 

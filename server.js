@@ -15,7 +15,7 @@ const connection = mysql2.createConnection(
         user: 'root',
         // Your MySQL password
         password: 'password', //password
-        database: 'employee_tracker_db'
+        database: 'etracker_db'
     },
     console.log(`Connected to the etracker_db database.`)
 
@@ -45,7 +45,7 @@ const question = [{
 // function to start the application
 function init () {
     inquirer.prompt(question).then((answer) => {
-        switch (answer.start) {
+        switch (data.action) {
             case 'View all employees':
                 viewAllEmployees();
                 break;
@@ -88,9 +88,11 @@ function init () {
             case 'View the total utilized budget of a department':
                 viewDepartmentBudget();
                 break;
-            case 'Exit':
-                connection.end();
-                break;
+            case 'Quit':
+                break
+                default:
+                    console.log(`Invalid action: ${answer.action}`);
+                
         }
     });
 }
@@ -101,10 +103,11 @@ function viewAllDepartments() {
         `SELECT department.id, department.name AS department
         FROM department;`
     ).then(([rows, fields]) => {
-        console.table(rows);
-        init();
-    }
-    );
+        console.table(rows)
+    }) 
+    .catch(console.log)
+    .then(() => init());
+       
 }
 
 // function to view all roles /promise
@@ -115,9 +118,9 @@ function viewAllRoles() {
         LEFT JOIN department ON role.department_id = department.id;`
     ).then(([rows, fields]) => {
         console.table(rows);
-        init();
-    }
-    );
+    })
+    .catch(console.log)
+    .then(() => init());
 }
 
 // function to add a department /promise
@@ -205,7 +208,99 @@ function addEmployee() {
     });
 }
 
-//end init function
+// function to view all employees /promise
+function viewAllEmployees() {
+    connection.promise().query(
+        `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+        FROM employee
+        LEFT JOIN role ON employee.role_id = role.id
+        LEFT JOIN department ON role.department_id = department.id
+        LEFT JOIN employee manager ON employee.manager_id = manager.id;`
+    ).then(([rows, fields]) => {
+        console.table(rows);
+        init();
+    }
+    );
+}
+
+// function to update an employee role /promise
+function updateEmployeeRole() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'employee',
+            message: "What is the employee's ID?"
+        },
+        {
+            type: 'input',
+            name: 'role',
+            message: "What is the employee's new role ID?"
+        }
+    ]).then((answer) => {
+        connection.promise().query(
+            `UPDATE employee
+            SET role_id = ?
+            WHERE id = ?;`, [answer.role, answer.employee]
+        ).then(() => {
+            console.log('Employee role updated successfully!');
+            init();
+        }
+        );
+    });
+}
+
+// BONUS
+
+// function to update an employee manager /promise
+function updateEmployeeManager() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'employee',
+            message: "What is the employee's ID?"
+        },
+        {
+            type: 'input',
+            name: 'manager',
+            message: "What is the employee's new manager ID?"
+        }
+    ]).then((answer) => {
+        connection.promise().query(
+            `UPDATE employee
+            SET manager_id = ?
+            WHERE id = ?;`, [answer.manager, answer.employee]
+        ).then(() => {
+            console.log('Employee manager updated successfully!');
+            init();
+        }
+        );
+    });
+}
+
+// function to view employees by manager /promise
+function viewEmployeesByManager() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'manager',
+            message: "What is the manager's ID?"
+        }
+    ]).then((answer) => {
+        connection.promise().query(
+            `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+            FROM employee
+            LEFT JOIN role ON employee.role_id = role.id
+            LEFT JOIN department ON role.department_id = department.id
+            LEFT JOIN employee manager ON employee.manager_id = manager.id
+            WHERE manager_id = ?;`, answer.manager
+        ).then(([rows, fields]) => {
+            console.table(rows);
+
+
+
+
+
+
 init();
 
 app.listen(PORT, () => {

@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project is CLI application with no starter code that allows the user to view and manage the departments, roles, and employees in a company. It will be built using node, inquirer, and MySQL. The application will be invoked by using the following command:
+This project is CLI application with no starter code that allows the user to view and manage the departments, roles, and employees in a company to better organize a business. It will be built using Node, Inquirer, and MySQL. The application will be invoked by using the following command:
 
 ```bash
 node server.js
